@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean name="service" class="ru.itpark.xml.XmlPostService">
+        <constructor-arg ref="client"/>
+    </bean>
+
+    <!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" >-->
+        <!--<property name="location" value="classpath:application.properties"/>-->
+    <!--</bean>-->
+
+    <bean class="ru.itpark.util.CustomPropertyPlaceholderConfigurer">
+        <property name="locations" value="application.json"/>
+    </bean>
+
+    <bean id="client" class="ru.itpark.xml.XmlRequestClient">
+        <constructor-arg name="jsonPath" value="${jsonPath}"/>
+        <constructor-arg name="url" value="${url}"/>
+    </bean>
+
+    <bean name="cachedAnnotationBPP" class="ru.itpark.xml.XmlCachedAnnotationBPP"/>
+
+</beans>
